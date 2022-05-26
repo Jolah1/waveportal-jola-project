@@ -3,6 +3,7 @@
   justify-content: center;
   width: 100%;
   margin-top: 64px;
+  padding-bottom: 20px;
   background-color: rgb(186, 38, 122);
   color: white;
 }
@@ -36,4 +37,13 @@
   background-color: rgb(112, 41, 83);
   color: white;
   
+}
+
+.text {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid rgb(112, 41, 83);
+  border-radius: 8px;
 }

@@ -145,9 +145,9 @@ const connectWallet = async () => {
               <div>Message: {wave.message}</div>
             </div>)
         })}
-        <div>
-        <label For="Message:"></label>
-        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        <div className="text">
+      
+        <textarea placeholder="Start typing your message..." name="message" id="message" cols="30" rows="10"></textarea>
 
         </div>
       </div>
