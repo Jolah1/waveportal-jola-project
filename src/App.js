@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {ethers} from "ethers";
 import './App.css';
+import abi from "./utils/WavePortal.json";
 
 const App = () => {
 
-  /*
-  *just a state variable we use to store our user's public wallet"
-  */
 const [currentAccount, setCurrentAccount] = useState("");
+
+const contractAddress = "0x7D6943f7412E5e7625b849b885d2d137f9ed1e5a";
+
+const contractABI = abi.abi;
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -42,6 +44,14 @@ const connectWallet = async () => {
       return;
     }
 
+    const accounts = await ethereum.request({method: "eth_requestAccounts"});
+    console.log("Connected", accounts[0]);
+    setCurrentAccount(accounts[0]);
+  } catch (error) {
+    console.log(error)
+  }
+  }
+
     const wave = async () => {
       try {
         const {ethereum} = window;
@@ -49,9 +59,19 @@ const connectWallet = async () => {
           const provider = new ethers.providers.Web3Provider(ethereum);
           const signer = provider.getSigner();
           const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
-
+          
           let count = await wavePortalContract.getTotalWaves();
           console.log("Retrieved total wave count...", count.toNumber());
+        
+        const waveTxn = await wavePortalContract.wave();
+        console.log("Mining...", waveTxn.hash);
+
+        await waveTxn.wait();
+        console.log("Mined --", waveTxn.hash);
+
+        count = await wavePortalContract.getTotalWaves();
+        console.log("Retrieved total wave count...", count.toNumber());
+        
         } else {
           console.log("Ethereum object doesn't exist!");
         }
@@ -60,13 +80,7 @@ const connectWallet = async () => {
         }
     }
 
-    const accounts = await ethereum.request({method: "eth_requestAccounts"});
-    console.log("Connected", accounts[0]);
-    setCurrentAccount(accounts[0]);
-  } catch (error) {
-    console.log(error)
-  }
-  }
+   
 
   useEffect (() => {
     checkIfWalletIsConnected();
@@ -85,7 +99,7 @@ const connectWallet = async () => {
         I am Jolade and I am a solidity developer, that's pretty cool right? Connect your Ethereum wallet and wave at me!
         </div>
 
-        <button className="waveButton" onClick={null}>
+        <button className="waveButton" onClick={wave}>
           Wave at Me
         </button>
 
