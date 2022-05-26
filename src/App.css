@@ -47,3 +47,18 @@
   border: solid rgb(112, 41, 83);
   border-radius: 8px;
 }
+.sumbtn {
+  
+  cursor: pointer;
+ 
+  display: flex;
+  justify-content: center;
+  border: 0;
+  border-radius: 3px;
+  background-color: rgb(112, 41, 83);
+  color: white;
+  font-size: medium;
+  font-family: 'Times New Roman', Times, serif;
+
+  
+}
