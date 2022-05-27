@@ -149,7 +149,7 @@ const connectWallet = async () => {
           <form action="" id="foom">
         <textarea placeholder="Start typing your message..." name="message" id="message" cols="30" rows="10"></textarea>
 
-          <button className="sumbtn" type="submit" onClick= "submit">Submit</button>
+          <button className="sumbtn" type="submit" onClick={allWaves}>Submit</button>
           </form>
         </div>
       </div>
